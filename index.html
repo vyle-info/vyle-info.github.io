@@ -1,1 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VyleUi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --fg: #ffffff;
+            --dim: #666666;
+            --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .desc {
+            color: var(--dim);
+            font-size: 0.8rem;
+            font-weight: 200;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-link {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            background: none;
+            padding-bottom: 4px;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background: var(--fg);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--fg);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .content-area {
+            position: relative;
+            height: 250px; 
+        }
+
+        .tab-content {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .tab-content.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .social-links a, .pg-link {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: block;
+            padding: 5px 0;
+        }
+
+        .social-links a:hover {
+            color: var(--fg);
+            transform: translateX(5px);
+        }
+
+        .about-text {
+            font-size: 0.9rem;
+            font-weight: 200;
+            line-height: 1.8;
+            color: var(--dim);
+        }
+
+        .contact-item {
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .contact-label {
+            color: var(--dim);
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>The Fifth Marden</h1>
+            <p class="desc">Created By Sentric Anarchists & VyleFz</p>
+        </header>
+
+        <nav>
+            <button class="nav-link active" onclick="showTab('social')">Social</button>
+            <button class="nav-link" onclick="showTab('play')">Projects</button>
+            <button class="nav-link" onclick="showTab('about')">About</button>
+            <button class="nav-link" onclick="showTab('contact')">Contact</button>
+        </nav>
+
+        <div class="content-area">
+            <div id="social" class="tab-content active">
+                <div class="social-links">
+                  <a href="https://www.youtube.com/@vylefz" target="_blank">YouTube</a>
+                  <a href="https://discord.com/users/1509175905178615808" target="_blank">Discord</a>
+                </div>
+            </div>
+
+            <div id="play" class="tab-content">
+                <a href="playground.html" class="pg-link">
+                    Click to view available projects
+                </a>
+            </div>
+
+            <div id="about" class="tab-content">
+                <p class="about-text">
+                    [VyleUi & The Fifth Marden]
+                </p>
+            </div>
+
+            <div id="contact" class="tab-content">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
+</body>
+</html>
